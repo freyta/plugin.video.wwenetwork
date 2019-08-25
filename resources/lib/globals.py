@@ -1,22 +1,10 @@
 # coding=utf-8
 import sys
-import re, os, time
-import calendar
-import pytz
+import re, os
 import urllib, urllib2, requests
-import json
-import cookielib
-import time
-import math
-from bs4 import BeautifulSoup 
-from datetime import date, datetime, timedelta
-from urllib2 import URLError, HTTPError
-#from PIL import Image
-from cStringIO import StringIO
 import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 
 addon_handle = int(sys.argv[1])
-
 
 #Addon Info
 ADDON = xbmcaddon.Addon()
