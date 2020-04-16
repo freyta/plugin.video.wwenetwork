@@ -121,7 +121,8 @@ def stream_to_listitem(stream_url, content_name, start_point=None):
     if start_point is not None:
         listitem.setProperty('TotalTime',start_point)
         listitem.setProperty('ResumeTime',start_point)
-    listitem.setMimeType("application/x-mpegURL")
+    listitem.setMimeType("application/vnd.apple.mpegurl")
+    listitem.setContentLookup(False)
     return listitem
 
 def check_request_result(r, status_code):
