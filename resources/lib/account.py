@@ -87,7 +87,11 @@ class Account:
         if not check_request_result(r, 200):
             sys.exit()
         url = r.json()['playerUrlCallback']
-
+        
+        # If we are using the live stream, adding dvr=true lets us rewind more than 6 seconds
+        if "streaming/events" in url:
+            url = url + "&dvr=true"
+            
         hls_url = ''
         while hls_url == '' or 'cdnfastly' in hls_url:
             r = requests.get(url)
