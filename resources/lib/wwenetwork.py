@@ -138,7 +138,8 @@ def process_items(items):
         plot = item['metadataLines'][2]['lines'][2]
         info = {'plot': plot, 'tvshowtitle': show_title, 'title': show_title + ' - ' + episode_title, 'aired': aired, 'date': date, 'genre': genre, 'mediatype': 'video'}
         icon = item['images']['tile'] + '|encoding=gzip&accept-encoding=gzip, deflate, br&accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
-        add_stream(item['title'], item['title'], 'episode', item['customFields']['DiceVideoId'], icon=icon, fanart=FANART, info=info, video_info=VIDEO_INFO,audio_info=AUDIO_INFO,start_point=start_point)
+        fanart = item['images']['wallpaper'] + '|encoding=gzip&accept-encoding=gzip, deflate, br&accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+        add_stream(item['title'], item['title'], 'episode', item['customFields']['DiceVideoId'], icon=icon, fanart=fanart, info=info, video_info=VIDEO_INFO,audio_info=AUDIO_INFO,start_point=start_point)
 
 def list_seasons(content_id, path):
     query_values = {
@@ -159,13 +160,14 @@ def list_seasons(content_id, path):
         genre = next(iter(item['genres']), '')
         info = {'plot': plot, 'tvshowtitle': show_title, 'genre': genre, 'mediatype': 'video'}
         icon = item['images']['tile']
+        fanart = item['images']['wallpaper']
 
     if not r.json()['item']['customFields']['IsSeasonal']:
         addDir('Most Recent',106,icon,FANART,content_id,'most_recent',info=info)
     else:
         pre_text = 'Season '
     for item in r.json()['item']['seasons']['items']:
-        addDir(pre_text + str(item['seasonNumber']),106,icon,FANART,content_id,str(item['seasonNumber']),season_id=str(item['id']),info=info)
+        addDir(pre_text + str(item['seasonNumber']),106,icon,fanart,content_id,str(item['seasonNumber']),season_id=str(item['id']),info=info)
 
 def fetch_list(list_id):
     page = 1
