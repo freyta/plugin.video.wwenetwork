@@ -187,7 +187,8 @@ def fetch_episodes(show_ids, season_number=None, season_id=None):
         url = API_BASE_URL + FILTER_EPISODES_PATH
         query_values = {
                 'page_size': 50,
-                'showIds': show_ids
+                'showIds': show_ids,
+                'segments': 'us'
                 }
         if(season_number is not None and season_number != 'most_recent'):
             query_values['year'] = season_number
